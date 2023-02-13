@@ -3,6 +3,8 @@
 Entity Framework does a lot of work for us, but sometimes we want to overwrite the conventions that it uses. We can do this using Data Annotations.
 
 ```cs
+using System.ComponentModel.DataAnnotations;
+
 namespace Vidly.Models
 {
     public class Customer
