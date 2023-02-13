@@ -12,7 +12,7 @@ namespace Vidly.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
-        public MembershipType MemType { get; set; } //Navigation Property
+        public MembershipType MembershipType { get; set; } //Navigation Property
         public byte MembershipTypeID { get; set; }
     }
 }
