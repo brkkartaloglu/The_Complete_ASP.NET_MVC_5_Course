@@ -72,7 +72,7 @@ We can create a new view for the form that we have to name after the Action we a
     </div>
     <div class="checkbox">
         <label>
-            @Html.CheckBoxFor(m => m.IsSubscribedToNewsletter) Subscribe to newsletter?
+            @Html.CheckBoxFor(m => m.IsSubscribedToNewsLetter) Subscribe to newsletter?
         </label>
     </div>
 }
