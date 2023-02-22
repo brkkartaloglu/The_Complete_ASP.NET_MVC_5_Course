@@ -34,26 +34,20 @@ namespace Vidly.Models
 We can create fields in our model to represent these "Magic Numbers" with names to represent their purpose
 
 ```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
 namespace Vidly.Models
 {
-    public class Customer
+    public class MembershipType
     {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Please enter a valid Customer Name")] // Name is not nullable anymore, it is now required
-        [StringLength(255)] // Name is not unlimited characters anymore, it is 255
+        public byte Id { get; set; }
+        public short SignUpFee { get; set; }
+        public byte DurationInMonths { get; set; }
+        public byte DiscountRate { get; set; }
         public string Name { get; set; }
-
-        public bool IsSubscribedToNewsletter { get; set; }
-
-        public MembershipType MembershipType { get; set; } //Navigation Property
-
-        [Display(Name = "Membership Type")]
-        public byte MembershipTypeId { get; set; }
-
-        [Display(Name = "Date of Birth")] // Will display in the view as "Date of Birth" instead of "Birthdate"
-        [Min18YearsIfAMember]
-        public DateTime? Birthdate { get; set; }
 
         public static readonly byte Unknown = 0;
         public static readonly byte PayAsYouGo = 1;
@@ -72,8 +66,8 @@ namespace Vidly.Models
         {
             var customer = (Customer) validationContext.ObjectInstance;
 
-            if(customer.MembershipTypeId == Customer.PayAsYouGo 
-                || customer.MembershipTypeId == Customer.Unknown)
+            if(customer.MembershipTypeId == MembershipType.PayAsYouGo 
+                || customer.MembershipTypeId == MembershipType.Unknown)
                 return ValidationResult.Success;
 
             if(customer.Birthdate == null)
