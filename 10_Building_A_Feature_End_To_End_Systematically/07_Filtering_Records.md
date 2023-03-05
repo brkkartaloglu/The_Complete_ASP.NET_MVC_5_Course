@@ -38,7 +38,16 @@ We will add a nullable string argument to this method called **query**. Instead 
 We can do the almost the same for the movies input in the **GetMovies()** method in the **Api/MoviesController.cs**:
 
 ```
+public IEnumerable<MovieDto> GetMovies(string query = null)
+        {
+            var moviesQuery = _context.Movies
+    .Include(m => m.Genre).Where(m => m.NumberAvailable > 0) ;
 
+            if (!String.IsNullOrWhiteSpace(query))
+                moviesQuery = moviesQuery.Where(c => c.Name.Contains(query));
+
+            return moviesQuery.ToList().Select(Mapper.Map<Movie, MovieDto>);
+        }
 ```
 
 We added the moviesQuery var. We have applied the **Where()** clause here to get only the available movies. If our query has a value, we see if it contains the user input. Then we call **ToList()** on the resulting options and return it. Now we are ready to post the form.
